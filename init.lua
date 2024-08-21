@@ -1,0 +1,2 @@
+require("lordmefloun")
+print("hello")
