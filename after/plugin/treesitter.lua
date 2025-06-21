@@ -1,5 +1,5 @@
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "javascript", "typescript", "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
+  ensure_installed = { "javascript", "java" ,"typescript", "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
   sync_install = false,
 
   -- Automatically install missing parsers when entering buffer
