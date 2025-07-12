@@ -48,3 +48,4 @@ vim.api.nvim_set_keymap('n', '<C-k>', '10k', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', ',v', ':vsplit<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', ',s', ':split<CR>', { noremap = true, silent = true })
 
+vim.keymap.set('n', '/', '<cmd>Telescope current_buffer_fuzzy_find<cr>', { desc = 'Fuzzy find in current buffer' })
