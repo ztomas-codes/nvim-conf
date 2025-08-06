@@ -42,8 +42,6 @@ end)
 
 vim.keymap.set('n', '<leader>ps', require("telescope").extensions.live_grep_args.live_grep_args, { noremap = true })
 
-vim.api.nvim_set_keymap('n', '<C-j>', '10j', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-k>', '10k', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', ',v', ':vsplit<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', ',s', ':split<CR>', { noremap = true, silent = true })

@@ -29,12 +29,27 @@ local plugins = {
             telescope.load_extension("live_grep_args")
         end
     },
+    -- {
+   -- "m4xshen/hardtime.nvim",
+   -- lazy = false,
+   -- dependencies = { "MunifTanjim/nui.nvim" },
+   -- opts = {
+   --   hints = {},
+   --   max_count = 3,
+   --   notification = false,
+   -- },
+-- },
     {
         "rose-pine/neovim",
         name = "rose-pine",
         config = function()
             vim.cmd("colorscheme rose-pine")
         end
+    },
+    {
+        "dgox16/oldworld.nvim",
+        lazy = false,
+        priority = 1000,
     },
     {
         "nvim-lualine/lualine.nvim",
@@ -49,6 +64,40 @@ local plugins = {
         "sindrets/diffview.nvim",
         "nvim-telescope/telescope.nvim", 
       },
+    },
+     {
+      'stevearc/conform.nvim',
+      event = 'BufWritePre', -- Spustí se před uložením souboru
+      config = function()
+        local conform = require('conform')
+
+        -- Zde definujeme, jaké formátovače se použijí pro jednotlivé typy souborů
+        conform.setup({
+          formatters_by_ft = {
+            javascript = { 'prettier' },
+            javascriptreact = { 'prettier' },
+            typescript = { 'prettier' },
+            typescriptreact = { 'prettier' },
+            json = { 'prettier' },
+            html = { 'prettier' },
+            css = { 'prettier' },
+            scss = { 'prettier' },
+            markdown = { 'prettier' },
+            ['*'] = { 'trim_newlines' }, -- Odstraní prázdné řádky na konci souboru
+          },
+          format_on_save = {
+            lsp_fallback = true, 
+            async = false, 
+            timeout_ms = 5000,
+          },
+        })
+
+        -- Přidáme mapování klávesy pro manuální formátování
+        -- Ujistěte se, že máte definované mapovací prefixy (např. v ~/.config/nvim/lua/keymaps.lua)
+        vim.keymap.set({ 'n', 'v' }, '<leader>f', function()
+          conform.format({ lsp_fallback = true, async = false })
+        end, { desc = 'Format file' })
+      end,
     },
     "nvim-treesitter/playground",
     "christoomey/vim-tmux-navigator",
@@ -65,7 +114,19 @@ local plugins = {
     "tpope/vim-dadbod",
     "kristijanhusak/vim-dadbod-completion",
     "kristijanhusak/vim-dadbod-ui",
-    "jose-elias-alvarez/null-ls.nvim",
+
+    {
+      "mfussenegger/nvim-lint",
+      event = "VeryLazy",
+      config = function()
+        require("lint").linters_by_ft = {
+          javascript = { "eslint_d" },
+          sh = { "shellcheck" },
+          -- přidejte další jazyky
+        }
+      end,
+    },
+
     "MunifTanjim/prettier.nvim",
     "rafamadriz/friendly-snippets",
     "folke/flash.nvim",
@@ -128,4 +189,3 @@ local plugins = {
 require("lazy").setup(plugins, {
     rocks = {enabled = false} 
 })
-
